@@ -1,17 +1,25 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import pizza1 from "./img/pizza1.jpg"
 
 const Home = () => (
   <div className="home">
     <div className="bigTitle">
       <h1>Your Favorite Food, Delivered While Coding</h1>
-      <button className="pizzaOrder">Pizza?</button>
+      <div>
+      <Link to='/pizza'>
+      <button type="button" className="btn btn-info">Pizza?</button>
+      </Link>
+      </div>
     </div>
     <div className="pizzaList">
       <h2>Food Delivery in Gotham City</h2>
     </div>
     <div className="pizzaPlaces1">
         <div className="pizza1">
-            <img src="./img/pizza1.jpg" alt="Photo of Pizza" />
+            <img width="200px" src={pizza1} alt="Photo of Pizza" />
+            
+
         </div>
     </div>
   </div>
