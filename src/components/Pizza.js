@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import * as yup from "yup";
 import axios from "axios";
 
-const pizzaInfo = yup.object().shape({
+const formInfo = yup.object().shape({
   name: yup.string().required("Enter Name"),
   size: yup.string().required("Please select size of pizza"),
   special: yup.string("Are there anything request."),
@@ -28,7 +28,7 @@ const Pizza = () => {
   const [buttonDisabled, setButtonDisabled] = useState(true);
 
   useEffect(() => {
-    pizzaInfo.isValid(formState).then((vaild) => {
+    formInfo.isValid(formState).then((vaild) => {
       setButtonDisabled(!vaild);
     });
   }, [formState]);
@@ -46,7 +46,7 @@ const Pizza = () => {
 
   const validate = (e) => {
     yup
-      .reach(pizzaInfo, e.target.name)
+      .reach(formInfo, e.target.name)
       .validate(e.target.value)
       .then((valid) => {
         setErrorState({
@@ -80,6 +80,18 @@ const Pizza = () => {
 
   return (
     <form onSubmit={formSubmit}>
+        <label htmlFor="name">
+            Name
+            <input
+            type="text"
+            name="name"
+            value={formState.name}
+            onChange={inputChange}
+            />
+            {errorState.name.length > 0 ? (
+          <p className="error">{errorState.name}</p>
+        ) : null}
+        </label>
       <label htmlFor="size">
         Choice of Size(required)
         <select
