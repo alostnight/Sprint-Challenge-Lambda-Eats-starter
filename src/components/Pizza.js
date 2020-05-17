@@ -6,11 +6,11 @@ const formInfo = yup.object().shape({
   name: yup.string().required(),
   size: yup.string(),
   special: yup.string(),
-  toppings: yup.string().oneOf([true]),
-  pepperni: yup.boolean().oneOf([true]),
-  sausage: yup.boolean().oneOf([true]),
-  pineapple: yup.boolean().oneOf([true]),
-  chicken: yup.boolean().oneOf([true]),
+  toppings: yup.boolean().oneOf([true]),
+  pepperoni: yup.boolean(),
+  sausage: yup.boolean(),
+  pineapple: yup.boolean(),
+  chicken: yup.boolean(),
 });
 
 const Form = () => {
@@ -62,23 +62,13 @@ const Form = () => {
     setFormState({ ...formState, [e.target.name]: value });
   };
 
-  const [post, setPost] = useState([]);
-
   const formSubmit = (e) => {
-    e.preventDefault();
+    e.preventDfault();
     axios
-      .post("https://reqres.in/api/users", formState)
-      .then((res) => {
-        setPost(res.data);
-        console.log(post);
-        setFormState({
-          name: "",
-          size: "",
-          special: "",
-          toppings: "",
-        });
-      })
-      .catch((err) => console.log(err.response));
+      .post("https://reqres.in/api/user", formState)
+      .then((Response) => console.log(Response))
+      .catch((err) => console.log(err));
+
   };
 
   return (
