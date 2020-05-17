@@ -18,7 +18,12 @@ describe("This is our first test!", () => {
         .should("have.value", "Jose Paquian ");
         cy.get('#sizes')
           .select('personal').should('have.value', 'personal'); 
-        cy.get('input[type="checkbox"]').check().should("be.checked");
+        cy.get('input[name="pepperoni"]').check().should("be.checked");
+        cy.get('input[name="chicken"]').check().should("be.checked");
+        cy.get('input[name="pineapple"]').check().should("be.checked");
+        cy.get('textarea')
+        .type("Double Meat.")
+        .should("have.value", "Double Meat.");
         cy.get('form').submit();
   
     });
