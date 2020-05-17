@@ -3,7 +3,7 @@ import * as yup from "yup";
 import axios from "axios";
 
 const formInfo = yup.object().shape({
-  name: yup.string().required(),
+  name: yup.string().required().min(2, "Name is too short"),
   size: yup.string(),
   special: yup.string(),
   toppings: yup.boolean().oneOf([true]),
