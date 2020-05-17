@@ -62,13 +62,23 @@ const Form = () => {
     setFormState({ ...formState, [e.target.name]: value });
   };
 
-  const formSubmit = (e) => {
-    e.preventDfault();
-    axios
-      .post("https://reqres.in/api/user", formState)
-      .then((Response) => console.log(Response))
-      .catch((err) => console.log(err));
+  const [post, setPost] = useState([]);
 
+  const formSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post("https://reqres.in/api/users", formState)
+      .then((res) => {
+        setPost(res.data);
+        console.log(post);
+        setFormState({
+          name: "",
+          size: "",
+          special: "",
+          toppings: "",
+        });
+      })
+      .catch((err) => console.log(err.response));
   };
 
   return (
