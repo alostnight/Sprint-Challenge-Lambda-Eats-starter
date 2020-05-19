@@ -63,14 +63,14 @@ const Form = () => {
   };
 
   const [post, setPost] = useState([]);
+  // console.log(useState)
 
   const formSubmit = (e) => {
     e.preventDefault();
     axios
       .post("https://reqres.in/api/users", formState)
       .then((res) => {
-        setPost(res.data);
-        console.log(post);
+        setPost(prevState => [...prevState, res.data]);
         setFormState({
           name: "",
           size: "",
@@ -80,6 +80,7 @@ const Form = () => {
       })
       .catch((err) => console.log(err.response));
   };
+  console.log(post)
 
   return (
     <form onSubmit={formSubmit}>
@@ -91,6 +92,9 @@ const Form = () => {
           value={formState.name}
           onChange={inputChange}
         />
+        {errorState.name.length > 0 ? (
+          <p className="error">{errorState.name}</p>
+        ) : null}
       </label>
       <label htmlFor="size">
         Choice of Size(required)
@@ -100,6 +104,7 @@ const Form = () => {
           id="sizes"
           onChange={inputChange}
         >
+          <option value="select-size">Please Select a Size</option>
           <option value="personal">Personal</option>
           <option value="small">Small</option>
           <option value="medium">Medium</option>
@@ -183,7 +188,6 @@ const Form = () => {
           <p className="error">{errorState.special}</p>
         ) : null}
       </label>
-      
       <button disabled={buttonDisabled}>Submit</button>
     </form>
   );
