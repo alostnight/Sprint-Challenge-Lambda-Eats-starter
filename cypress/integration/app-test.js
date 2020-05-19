@@ -24,9 +24,25 @@ describe("This is our first test!", () => {
         cy.get('textarea')
         .type("Double Meat.")
         .should("have.value", "Double Meat.");
-        cy.get('form').submit();
-  
+        cy.get('form').submit();  
     });
-  });
 
-  
+    it("Input Name in the Name", () => {
+        //Arrange - Get the Element
+        //ACT - Mimic User Interaction
+        //Assert - Test / Verify
+          cy.get('input[name="name"]')
+          .type("Jim Taylor")
+          .should("have.value", "Jim Taylor");
+          cy.get('#sizes')
+            .select('small').should('have.value', 'small'); 
+          cy.get('input[name="pepperoni"]').check().should("be.checked");
+          cy.get('input[name="chicken"]').check().should("be.checked");
+          cy.get('input[name="pineapple"]').check().should("be.checked");
+          cy.get('textarea')
+          .type("No cheese.")
+          .should("have.value", "No cheese.");
+          cy.get('form').submit();
+    
+      });
+  });
